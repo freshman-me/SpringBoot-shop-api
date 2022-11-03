@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.freshman.mapper.ProductMapper">
+    <resultMap id="product" type="com.freshman.pojo.Product">
+        <result column="pro_name" property="productName"></result>
+    </resultMap>
+    <insert id="addProduct">
+        insert into product(pro_name,description) values (#{productName},#{description});
+    </insert>
+
+
+    <delete id="deleteProduct">
+        delete from product where id = #{id};
+    </delete>
+
+
+    <select id="getById" resultMap="product">
+        select * from product where id = #{id};
+    </select>
+
+    <select id="getAll" resultMap="product">
+        select * from product;
+    </select>
+
+    <update id="updateProduct">
+        update product set pro_name = #{productName},description = #{description} where id = #{id};
+    </update>
+
+</mapper>
