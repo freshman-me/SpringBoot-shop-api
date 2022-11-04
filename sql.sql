@@ -16,6 +16,6 @@ create table product(
 );
 
 # 插入admin用户和一些商品数据
-insert into user(id, username, password, is_admin) VALUES (1,'admin','admin',1);
+insert into user(id, username, password, is_admin) VALUES (1,'admin','YWRtaW4=',1);
 
 insert into product(id, pro_name, description) VALUES (1,'apple','apple description'),(2,'oppo','oppo description');
