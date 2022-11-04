@@ -4,6 +4,7 @@ import com.freshman.controller.Result;
 import com.freshman.mapper.UserMapper;
 import com.freshman.pojo.User;
 import com.freshman.service.UserService;
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,11 @@ public class UserServiceImpl implements UserService {
     public Result addUser(User user) {
         if (this.userMapper.selectByUserName(user.getUsername()) == null){
             // 没有用户,可以添加
+            byte[] bytes = user.getPassword().getBytes();
+            Base64 base64 = new Base64();
+            byte[] encode = base64.encode(bytes);
+            String password = new String(encode);
+            user.setPassword(password);
             userMapper.insertUser(user);
             return new Result(1,"register successful!");
         }else {
@@ -27,6 +33,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Result login(User user) {
+        byte[] bytes = user.getPassword().getBytes();
+        Base64 base64 = new Base64();
+        byte[] encode = base64.encode(bytes);
+        String password = new String(encode);
+        user.setPassword(password);
         if(userMapper.selectUser(user)!= null){
             // 有这一号人
             return new Result(100,"login successful");
