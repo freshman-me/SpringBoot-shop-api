@@ -1,7 +1,10 @@
 package com.freshman.jwt;
 
 import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.interfaces.Claim;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import com.freshman.pojo.User;
 
 import java.util.Calendar;
@@ -23,7 +26,7 @@ public class JwtUtil {
      * @param user 用户的信息
      * @return  token
      */
-   public static String createToken(User user){
+   public static String createToken(User user) throws Exception{
        // 现在时间
        Date iatDate = new Date();
 
@@ -46,5 +49,17 @@ public class JwtUtil {
                .sign(Algorithm.HMAC256(SECRET));  // signature
 
         return token;
+   }
+
+   public static Map<String, Claim> verifyToken(String token){
+       DecodedJWT jwt = null;
+       try {
+           JWTVerifier jwtVerifier = JWT.require(Algorithm.HMAC256(SECRET)).build();
+           jwt = jwtVerifier.verify(token);
+
+       }catch (Exception exception){
+           exception.printStackTrace();
+       }
+       return jwt.getClaims();
    }
 }
