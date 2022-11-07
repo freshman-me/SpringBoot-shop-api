@@ -1,6 +1,7 @@
 package com.freshman.service.impl;
 
 import com.freshman.controller.Result;
+import com.freshman.jwt.JwtUtil;
 import com.freshman.mapper.UserMapper;
 import com.freshman.pojo.User;
 import com.freshman.service.UserService;
@@ -33,6 +34,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Result login(User user) {
+//        记得添加token返回
         byte[] bytes = user.getPassword().getBytes();
         Base64 base64 = new Base64();
         byte[] encode = base64.encode(bytes);

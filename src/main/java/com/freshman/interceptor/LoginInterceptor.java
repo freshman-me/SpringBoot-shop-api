@@ -12,7 +12,7 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
        // 实现用户登录验证
-        String header = request.getHeader("user");
+
 
         return true;
     }
