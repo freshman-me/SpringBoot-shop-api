@@ -1,5 +1,6 @@
 package com.freshman.service.impl;
 
+import com.freshman.controller.Code;
 import com.freshman.controller.Result;
 import com.freshman.mapper.ProductMapper;
 import com.freshman.pojo.Product;
@@ -19,9 +20,9 @@ public class ProductServiceImpl implements ProductService {
     public Result getById(Integer id) {
         Product product = productMapper.getById(id);
         if(product != null){
-            return new Result(300,"find sucessful",product);
+            return new Result(Code.FIND_SUCCESS,"find successful",product);
         }else {
-            return new Result(-300,"find fail");
+            return new Result(Code.FIND_FAIL,"find fail");
         }
     }
 
@@ -29,9 +30,9 @@ public class ProductServiceImpl implements ProductService {
     public Result getAll() {
         List<Product> list = productMapper.getAll();
         if (list != null){
-            return new Result(400,"find all sucessful",list);
+            return new Result(Code.FIND_ALL_SUCCESS,"find all successful",list);
         }else {
-            return new Result(-400,"find all fail");
+            return new Result(Code.FIND_ALL_FAIL,"find all fail");
         }
     }
 
@@ -39,9 +40,9 @@ public class ProductServiceImpl implements ProductService {
     public Result addProduct(Product product) {
         int i = productMapper.addProduct(product);
         if (i > 0){
-            return new Result(500,"Add product sucessful");
+            return new Result(Code.ADD_SUCCESS,"Add product successful");
         }else {
-            return new Result(-500,"Add product fail");
+            return new Result(Code.ADD_FAIL,"Add product fail");
         }
     }
 
@@ -49,9 +50,9 @@ public class ProductServiceImpl implements ProductService {
     public Result deleteProduct(Integer id) {
         int i = productMapper.deleteProduct(id);
         if (i > 0){
-            return new Result(600,"delete successful");
+            return new Result(Code.DELETE_SUCCESS,"delete successful");
         }else {
-            return new Result(-600,"delete fail");
+            return new Result(Code.DELETE_FAIL,"delete fail");
         }
     }
 
@@ -59,8 +60,8 @@ public class ProductServiceImpl implements ProductService {
     public Result updateProduct(Product product) {
         int i = productMapper.updateProduct(product);
         if (i > 0){
-            return new Result(700,"update successful!");
+            return new Result(Code.UPDATE_SUCCESS,"update successful!");
         }else
-            return new Result(-700,"update fail");
+            return new Result(Code.UPDATE_FAIL,"update fail");
     }
 }

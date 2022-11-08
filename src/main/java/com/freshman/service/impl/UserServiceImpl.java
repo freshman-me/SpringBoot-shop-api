@@ -1,5 +1,6 @@
 package com.freshman.service.impl;
 
+import com.freshman.controller.Code;
 import com.freshman.controller.Result;
 import com.freshman.jwt.JwtUtil;
 import com.freshman.mapper.UserMapper;
@@ -26,9 +27,9 @@ public class UserServiceImpl implements UserService {
             String password = new String(encode);
             user.setPassword(password);
             userMapper.insertUser(user);
-            return new Result(1,"register successful!");
+            return new Result(Code.REGISTER_SUCCESS,"register successful!");
         }else {
-            return new Result(-1,"The user name already exists");
+            return new Result(Code.REGISTER_FAIL,"The username already exists");
         }
     }
 
@@ -44,9 +45,9 @@ public class UserServiceImpl implements UserService {
             //        添加token返回
             User user1 = userMapper.selectUser(user);
             System.out.println(user1);
-            return new Result(100,"login successful",JwtUtil.createToken(user1));
+            return new Result(Code.LOGIN_SUCCESS,"login successful",JwtUtil.createToken(user1));
         }else {
-            return new Result(-100,"login fail");
+            return new Result(Code.LOGIN_FAIL,"login fail");
         }
     }
 }

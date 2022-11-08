@@ -40,7 +40,8 @@ public class JwtUtil {
        map.put("alg", "HS256");
        map.put("typ", "JWT");
 
-       String token = JWT.create().withHeader(map)  // header
+       String token = JWT.create().withHeader(map) // header
+               .withClaim("id",user.getId().toString())
                .withClaim("username",user.getUsername())
                .withClaim("isAdmin",user.getIsAdmin().toString())  // payload
                .withIssuedAt(iatDate)  // sign date
