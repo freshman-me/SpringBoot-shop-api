@@ -20,7 +20,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public Result login(@RequestBody User user){
+    public Result login(@RequestBody User user) throws Exception {
         return userService.login(user);
     }
 }

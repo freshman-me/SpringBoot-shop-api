@@ -3,7 +3,9 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.freshman.mapper.UserMapper">
-
+    <resultMap id="selectUser" type="com.freshman.pojo.User">
+        <result property="isAdmin" column="is_admin" />
+    </resultMap>
 
     <insert id="insertUser" parameterType="com.freshman.pojo.User">
         insert into user(username, password)
@@ -15,7 +17,7 @@
         where username = #{userName}
     </select>
 
-    <select id="selectUser" resultType="com.freshman.pojo.User">
+    <select id="selectUser" resultMap="selectUser">
         select *
         from user
         where username = #{username}

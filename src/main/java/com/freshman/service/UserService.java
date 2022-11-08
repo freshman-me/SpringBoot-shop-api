@@ -7,5 +7,5 @@ public interface UserService {
 
     Result addUser(User user);
 
-    Result login(User user);
+    Result login(User user) throws Exception;
 }

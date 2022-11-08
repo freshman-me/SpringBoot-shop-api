@@ -33,8 +33,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Result login(User user) {
-//        记得添加token返回
+    public Result login(User user) throws Exception {
         byte[] bytes = user.getPassword().getBytes();
         Base64 base64 = new Base64();
         byte[] encode = base64.encode(bytes);
@@ -42,7 +41,10 @@ public class UserServiceImpl implements UserService {
         user.setPassword(password);
         if(userMapper.selectUser(user)!= null){
             // 有这一号人
-            return new Result(100,"login successful");
+            //        添加token返回
+            User user1 = userMapper.selectUser(user);
+            System.out.println(user1);
+            return new Result(100,"login successful",JwtUtil.createToken(user1));
         }else {
             return new Result(-100,"login fail");
         }
