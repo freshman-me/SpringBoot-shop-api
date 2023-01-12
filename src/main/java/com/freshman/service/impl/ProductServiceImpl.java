@@ -6,6 +6,7 @@ import com.freshman.mapper.ProductMapper;
 import com.freshman.pojo.Product;
 import com.freshman.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class ProductServiceImpl implements ProductService {
     private ProductMapper productMapper;
 
     @Override
+    @Cacheable(value = "cacheSpace", key = "#id")
     public Result getById(Integer id) {
         Product product = productMapper.getById(id);
         if(product != null){
