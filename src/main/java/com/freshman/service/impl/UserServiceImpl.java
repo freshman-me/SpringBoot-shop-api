@@ -9,6 +9,7 @@ import com.freshman.service.UserService;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.DigestUtils;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -20,6 +21,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public Result addUser(User user) {
         if (this.userMapper.selectByUserName(user.getUsername()) == null){
+            // md5加密
+            System.out.println(DigestUtils.md5DigestAsHex(user.getPassword().getBytes()));
             // 没有用户,可以添加
             byte[] bytes = user.getPassword().getBytes();
             Base64 base64 = new Base64();
