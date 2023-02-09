@@ -2,11 +2,14 @@ package com.freshman.controller;
 
 import com.freshman.pojo.Product;
 import com.freshman.service.ProductService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/products")
+@Slf4j
 public class ProductController {
     @Autowired
     private ProductService productService;
@@ -17,7 +20,9 @@ public class ProductController {
     }
 
     @GetMapping("/getAll")
+    @Cacheable(value = "productCache",key = "#root.methodName")
     public Result getAll(){
+        log.info("使用了数据库~~~~");
         return productService.getAll();
     }
 

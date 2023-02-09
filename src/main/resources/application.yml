@@ -12,3 +12,19 @@ spring:
     password: root
     url: jdbc:mysql://localhost:3306/shop?useUnicode=true&characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true
     driver-class-name: com.mysql.cj.jdbc.Driver
+  # redis相关配置
+  redis:
+    host: 192.168.159.131
+    password: 210611
+    port: 6379
+    database: 0
+    jedis:
+      #Redis连接池配置
+      pool:
+        max-active: 8 # 最大连接数
+        max-wait: 1ms # 连接池最大阻塞等待时间
+        max-idle: 4 # 连接池中的最大空闲连接
+        min-idle: 0 # 连接池中的最小空闲连接
+  cache:
+    redis:
+      time-to-live: 600s
